@@ -3,7 +3,7 @@
  * Plugin Module Helper File
  *
  * @package         Advanced Module Manager
- * @version         5.3.5
+ * @version         5.3.6
  *
  * @author          Peter van Westen <peter@nonumber.nl>
  * @link            http://www.nonumber.nl

@@ -3,7 +3,7 @@
  * NoNumber Framework Helper File: Tags
  *
  * @package         NoNumber Framework
- * @version         15.11.8233
+ * @version         15.12.7724
  *
  * @author          Peter van Westen <peter@nonumber.nl>
  * @link            http://www.nonumber.nl
@@ -28,7 +28,7 @@ class NNTags
 		$string = str_replace(array('\\' . $temp_separator, '\\' . $temp_equal), array($separator, $equal), $string);
 
 		// protect all html tags
-		if (preg_match_all('#</?[a-z][^>]*>#si', $string, $tags, PREG_SET_ORDER) > 0)
+		if (preg_match_all('#</?[a-z][^>]*>#si', $string, $tags, PREG_SET_ORDER))
 		{
 			foreach ($tags as $tag)
 			{
@@ -62,7 +62,7 @@ class NNTags
 			// unprotect tags in key and val
 			foreach ($keyval as $key => $val)
 			{
-				if (preg_match_all('#' . preg_quote($tag_start, '#') . '(.*?)' . preg_quote($tag_end, '#') . '#si', $val, $tags, PREG_SET_ORDER) > 0)
+				if (preg_match_all('#' . preg_quote($tag_start, '#') . '(.*?)' . preg_quote($tag_end, '#') . '#si', $val, $tags, PREG_SET_ORDER))
 				{
 					foreach ($tags as $tag)
 					{
@@ -168,14 +168,14 @@ class NNTags
 
 		// Remove paragraphs around block elements
 		$block_elements = array(
-				'p', 'div',
-				'table', 'tr', 'td', 'thead', 'tfoot',
-				'h[1-6]'
+			'p', 'div',
+			'table', 'tr', 'td', 'thead', 'tfoot',
+			'h[1-6]',
 		);
 		$block_elements = '(' . implode('|', $block_elements) . ')';
 		while (preg_match('#(<p(?: [^>]*)?>)(\s*' . $breaks . ')(<' . $block_elements . '(?: [^>]*)?>)#s', $string, $match))
 		{
-			if($match['4'] == 'p')
+			if ($match['4'] == 'p')
 			{
 				$match['3'] = $match['1'] . $match['3'];
 				NNText::combinePTags($match['3']);
@@ -199,6 +199,54 @@ class NNTags
 		}
 
 		return $new_tags;
+	}
+
+	public static function fixSurroundingTags($tags)
+	{
+		$keys = array_keys($tags);
+
+		$breaks = '(?:(?:<br ?/?>|:\|:)\s*)*';
+		$string = implode(':|:', $tags);
+
+		// Remove inline elements around block elements
+		$string = preg_replace('#'
+			. '<(?:' . implode('|', self::getInlineElements()) . ')(?: [^>]*)?>'
+			. '(' . $breaks . '<(?:' . implode('|', self::getBlockElements()) . ')(?: [^>]*)?>)'
+			. '#',
+			'\1', $string);
+		$string = preg_replace('#'
+			. '(</(?:' . implode('|', self::getBlockElements()) . ')>' . $breaks . ')'
+			. '</(?:' . implode('|', self::getInlineElements()) . ')>'
+			. '#',
+			'\1', $string);
+
+		$tags = explode(':|:', $string);
+
+		$new_tags = array();
+
+		foreach ($tags as $key => $val)
+		{
+			$key            = isset($keys[$key]) ? $keys[$key] : $key;
+			$new_tags[$key] = $val;
+		}
+
+		return $new_tags;
+	}
+
+	private static function getBlockElements()
+	{
+		return array(
+			'div', 'p', 'pre',
+			'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+		);
+	}
+
+	private static function getInlineElements()
+	{
+		return array(
+			'span', 'code', 'a',
+			'strong', 'b', 'em', 'i', 'u', 'big', 'small', 'font',
+		);
 	}
 
 	public static function setSurroundingTags($pre, $post, $tags = 0)

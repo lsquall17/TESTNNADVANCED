@@ -3,7 +3,7 @@
  * NoNumber Framework Helper File: Assignments: Geo
  *
  * @package         NoNumber Framework
- * @version         15.11.8233
+ * @version         15.12.7724
  *
  * @author          Peter van Westen <peter@nonumber.nl>
  * @link            http://www.nonumber.nl
@@ -12,14 +12,6 @@
  */
 
 defined('_JEXEC') or die;
-
-if (is_dir(JPATH_LIBRARIES . '/geoip'))
-{
-	JLoader::registerNamespace('GeoIp2', JPATH_LIBRARIES . '/geoip');
-	JLoader::registerNamespace('MaxMind', JPATH_LIBRARIES . '/geoip');
-}
-
-use GeoIp2\GeoIp;
 
 require_once JPATH_PLUGINS . '/system/nnframework/helpers/assignment.php';
 
@@ -91,10 +83,12 @@ class NNFrameworkAssignmentsGeo extends NNFrameworkAssignment
 			return $this->geo;
 		}
 
-		if (!class_exists('GeoIp2\\GeoIp'))
+		if (!file_exists(JPATH_LIBRARIES . '/geoip/geoip.php'))
 		{
-			return null;
+			return false;
 		}
+
+		require_once JPATH_LIBRARIES . '/geoip/geoip.php';
 
 		$geo = new GeoIp($ip);
 

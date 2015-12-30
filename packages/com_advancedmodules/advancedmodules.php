@@ -1,7 +1,7 @@
 <?php
 /**
  * @package         Advanced Module Manager
- * @version         5.3.5
+ * @version         5.3.6
  *
  * @author          Peter van Westen <peter@nonumber.nl>
  * @link            http://www.nonumber.nl
@@ -40,8 +40,8 @@ if (!JFile::exists(JPATH_PLUGINS . '/system/nnframework/nnframework.php'))
 }
 
 // give notice if NoNumber Framework plugin is not enabled
-$nnep = JPluginHelper::getPlugin('system', 'nnframework');
-if (!isset($nnep->name))
+$nnframework = JPluginHelper::getPlugin('system', 'nnframework');
+if (!isset($nnframework->name))
 {
 	$msg = JText::_('AMM_NONUMBER_FRAMEWORK_NOT_ENABLED')
 		. ' ' . JText::sprintf('AMM_EXTENSION_CAN_NOT_FUNCTION', JText::_('COM_ADVANCEDMODULES'));

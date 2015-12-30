@@ -4,7 +4,7 @@
  * Displays a hidden field with a boolean value based on whether the given extension is installed
  *
  * @package         NoNumber Framework
- * @version         15.11.8233
+ * @version         15.12.7724
  *
  * @author          Peter van Westen <peter@nonumber.nl>
  * @link            http://www.nonumber.nl

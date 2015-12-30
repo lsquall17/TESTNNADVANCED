@@ -3,7 +3,7 @@
  * Plugin Module Helper File
  *
  * @package         Advanced Module Manager
- * @version         5.3.5
+ * @version         5.3.6
  *
  * @author          Peter van Westen <peter@nonumber.nl>
  * @link            http://www.nonumber.nl
@@ -135,6 +135,12 @@ class PlgSystemAdvancedModuleHelper
 		foreach ($modules as $module)
 		{
 			$module->name = substr($module->module, 4);
+
+			if (JFactory::getApplication()->input->get('option') == 'com_ajax')
+			{
+				$filtered_modules[] = $module;
+				continue;
+			}
 
 			if (!isset($module->mirror_id))
 			{

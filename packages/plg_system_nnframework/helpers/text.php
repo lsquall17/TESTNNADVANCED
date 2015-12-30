@@ -3,7 +3,7 @@
  * NoNumber Framework Helper File: Text
  *
  * @package         NoNumber Framework
- * @version         15.11.8233
+ * @version         15.12.7724
  *
  * @author          Peter van Westen <peter@nonumber.nl>
  * @link            http://www.nonumber.nl
@@ -351,7 +351,7 @@ class NNText
 
 		$p_start_tag   = '<p(?: [^>]*)?>';
 		$optional_tags = '\s*(?:<\!-- [^>]*-->|&nbsp;|&\#160;)*\s*';
-		if (!preg_match_all('#(' . $p_start_tag . ')(' . $optional_tags . ')(' . $p_start_tag . ')#si', $string, $tags, PREG_SET_ORDER) > 0)
+		if (!preg_match_all('#(' . $p_start_tag . ')(' . $optional_tags . ')(' . $p_start_tag . ')#si', $string, $tags, PREG_SET_ORDER))
 		{
 			return;
 		}
@@ -474,7 +474,7 @@ class NNText
 			return array();
 		}
 
-		if (preg_match_all('#([a-z0-9-_]+)="([^"]*)"#si', $string, $matches, PREG_SET_ORDER) < 1)
+		if (!preg_match_all('#([a-z0-9-_]+)="([^"]*)"#si', $string, $matches, PREG_SET_ORDER))
 		{
 			return array();
 		}
@@ -569,11 +569,11 @@ class NNText
 
 		// Replace weird whitespace characters like (Â) with spaces
 		//$string = str_replace(array(chr(160), chr(194)), ' ', $string);
-		$string = self::regexReplace('\xC2\xA0', ' ', $string);
-		$string = self::regexReplace('\xE2\x80\xA8', ' ', $string); // ascii only
+		$string = str_replace("\xC2\xA0", ' ', $string);
+		$string = str_replace("\xE2\x80\xA8", ' ', $string); // ascii only
 
 		// Replace double byte whitespaces by single byte (East Asian languages)
-		$string = self::regexReplace('\xE3\x80\x80', ' ', $string);
+		$string = str_replace("\xE3\x80\x80", ' ', $string);
 
 		// Remove any '-' from the string as they will be used as concatenator.
 		// Would be great to let the spaces in but only Firefox is friendly with this

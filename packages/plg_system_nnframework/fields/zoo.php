@@ -3,7 +3,7 @@
  * Element: Zoo
  *
  * @package         NoNumber Framework
- * @version         15.11.8233
+ * @version         15.12.7724
  *
  * @author          Peter van Westen <peter@nonumber.nl>
  * @link            http://www.nonumber.nl
@@ -114,9 +114,9 @@ class JFormFieldNN_Zoo extends NNFormGroupField
 	function getItems()
 	{
 		$query = $this->db->getQuery(true)
-				->select('COUNT(*)')
-				->from('#__zoo_item AS i')
-				->where('i.state > -1');
+			->select('COUNT(*)')
+			->from('#__zoo_item AS i')
+			->where('i.state > -1');
 		$this->db->setQuery($query);
 		$total = $this->db->loadResult();
 

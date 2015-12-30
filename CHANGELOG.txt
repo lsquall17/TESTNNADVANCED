@@ -16,6 +16,11 @@
  * # Fixed
  */
 
+09-Dec-2015 : v5.3.6
+ + Added translations: fi-FI
+ ^ Updated translations: fr-FR
+ # Fixed issue with modules using com_ajax not working when using non-menu assignments
+
 10-Nov-2015 : v5.3.5
  ^ Improved handling on initialisation of plugin
 

@@ -3,7 +3,7 @@
  * Table class: advancedmodules
  *
  * @package         Advanced Module Manager
- * @version         5.3.5-revPRO
+ * @version         5.3.6-revPRO
  *
  * @author          Peter van Westen <peter@nonumber.nl>
  * @link            http://www.nonumber.nl

@@ -3,7 +3,7 @@
  * NoNumber Framework Helper File: Functions
  *
  * @package         NoNumber Framework
- * @version         15.11.8233
+ * @version         15.12.7724
  *
  * @author          Peter van Westen <peter@nonumber.nl>
  * @link            http://www.nonumber.nl
@@ -357,7 +357,9 @@ class NNFrameworkFunctions
 
 	static function getExtensionPath($extension = 'plg_system_nnframework', $basePath = JPATH_ADMINISTRATOR, $check_folder = '')
 	{
-		if (!in_array($basePath, array('', JPATH_ADMINISTRATOR, JPATH_SITE)))
+		$basePath = $basePath ?: JPATH_SITE;
+
+		if (!in_array($basePath, array(JPATH_ADMINISTRATOR, JPATH_SITE)))
 		{
 			return $basePath;
 		}

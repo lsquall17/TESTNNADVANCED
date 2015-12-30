@@ -3,7 +3,7 @@
  * NoNumber Framework Helper File: Assignments
  *
  * @package         NoNumber Framework
- * @version         15.11.8233
+ * @version         15.12.7724
  *
  * @author          Peter van Westen <peter@nonumber.nl>
  * @link            http://www.nonumber.nl
@@ -162,7 +162,7 @@ class NNFrameworkAssignmentsHelper
 		$this->request->layout = JFactory::getApplication()->input->get('layout', '', 'string');
 		$this->request->Itemid = JFactory::getApplication()->input->getInt('Itemid', 0);
 
-		$id = JFactory::getApplication()->input->get('id', array(0), 'array');
+		$id                = JFactory::getApplication()->input->get('id', array(0), 'array');
 		$this->request->id = (int) $id['0'];
 
 		switch ($this->request->option)
@@ -195,7 +195,7 @@ class NNFrameworkAssignmentsHelper
 
 		if (!$this->request->id)
 		{
-			$cid = JFactory::getApplication()->input->get('cid', array(0), 'array');
+			$cid               = JFactory::getApplication()->input->get('cid', array(0), 'array');
 			$this->request->id = (int) $cid['0'];
 		}
 

@@ -3,7 +3,7 @@
  * Main Plugin File
  *
  * @package         Advanced Module Manager
- * @version         5.3.5-revPRO
+ * @version         5.3.6-revPRO
  *
  * @author          Peter van Westen <peter@nonumber.nl>
  * @link            http://www.nonumber.nl
@@ -112,9 +112,9 @@ class PlgSystemAdvancedModules extends JPlugin
 		$this->_init = true;
 
 		if (
-				JFactory::getApplication()->input->getWord('format') == 'feed'
-				|| JFactory::getApplication()->input->getWord('type') == 'rss'
-				|| JFactory::getApplication()->input->getWord('type') == 'atom'
+			JFactory::getApplication()->input->getWord('format') == 'feed'
+			|| JFactory::getApplication()->input->getWord('type') == 'rss'
+			|| JFactory::getApplication()->input->getWord('type') == 'atom'
 		)
 		{
 			return false;
